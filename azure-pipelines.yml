@@ -26,7 +26,7 @@ stages:
           - task: AzureCLI@2
             name: Deploy
             inputs:
-              azureSubscription: 'Azure subscription ()'
+              azureSubscription: 'Azure subscription 1(2)(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
