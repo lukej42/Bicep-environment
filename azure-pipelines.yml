@@ -29,6 +29,6 @@ stages:
                 echo "Starting deployment to $(resourceGroupName)..."
                 az deployment group create \
                   --resource-group bicep.app \
-                  --template-file main.bicep \
+                  --template-file infrastructure/main.bicep \
                   --parameters @parameters.dev.json
                   echo "Deployment complete."
