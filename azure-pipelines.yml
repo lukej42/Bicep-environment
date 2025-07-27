@@ -7,8 +7,12 @@ variables:
   azureSubscription: 'Your-Service-Connection-Name'  # Replace with your service connection name
   resourceGroupName: 'bicep-app'                  # Replace with your target resource group
   location: 'uksouth'
-  environment: 'dev'
   appName: 'myapp'
+
+parameters:
+- name: environment
+  type: string
+  default: 'dev'
 
 stages:
   - stage: DeployInfra
@@ -22,14 +26,13 @@ stages:
           - task: AzureCLI@2
             name: Deploy
             inputs:
-              azureSubscription: 'Azure subscription 1(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
+              azureSubscription: 'Azure subscription 1(1)(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                echo "Deploying to $(environment)..."
-                az bicep install
+                echo "Deploying to ${{ parameters.environment }}..."
                 az deployment group create \
                   --resource-group $(resourceGroupName) \
                   --template-file infrastructure/main.bicep \
-                  --parameters @infrastructure/parameters.$(environment).json \
+                  --parameters @infrastructure/parameters.${{ parameters.environment }}.json \
                   --parameters location=$(location)
