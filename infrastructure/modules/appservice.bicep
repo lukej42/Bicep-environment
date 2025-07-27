@@ -6,7 +6,7 @@ resource plan 'Microsoft.Web/serverfarms@2022-09-01' = {
   location: location
   sku: {
     name: sku
-    tier: 'PremiumV2'
+    tier: 'FreeF1'
   }
   properties: {
     reserved: false
