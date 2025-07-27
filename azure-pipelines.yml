@@ -7,7 +7,7 @@ variables:
   azureSubscription: 'Your-Service-Connection-Name'  # Replace with your service connection name
   resourceGroupName: 'bicep-app'                  # Replace with your target resource group
   location: 'uksouth'
-  environment: 'prod'
+  environment: 'dev'
   appName: 'myapp'
 
 stages:
@@ -28,8 +28,7 @@ stages:
               inlineScript: |
                 echo "Starting deployment to $(resourceGroupName)..."
                 az deployment group create \
-                  --resource-group $(resourceGroupName) \
-                  --template-file infrastructure/main.bicep \
-                  --parameters @infrastructure/parameters.$(environment).json \
-                  --parameters location=$(location) environment=$(environment) appName=$(appName)
+                  --resource-group bicep.app \
+                  --template-file main.bicep \
+                  --parameters @parameters.dev.json
                   echo "Deployment complete."
