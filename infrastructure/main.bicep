@@ -13,7 +13,7 @@ module plan './modules/appservice.bicep' = {
   params: {
     name: '${appName}plan${environment}'
     location: location
-    sku: 'P1v2'
+    sku: 'F1'
   }
 }
 module app './modules/app.bicep' = {
@@ -33,7 +33,7 @@ module insights './modules/insights.bicep' = {
   }
 }
 module keyvault './modules/keyvault.bicep' = {
-  name: 'kvDeploy'
+  name: 'kvDeployljg'
   params: {
     name: '${appName}-kv-${environment}'
     location: location
