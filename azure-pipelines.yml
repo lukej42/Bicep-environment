@@ -26,10 +26,10 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                echo "Starting deployment to $(resourceGroupName)..."
+                echo "Deploying to $(environment)..."
+                az bicep install
                 az deployment group create \
-                --resource-group $(resourceGroupName) \
-                --template-file infrastructure/main.bicep \
-                --parameters @infrastructure/parameters.$(environment).json \
-                --parameters environment=$(environment) location=$(location) appName=$(appName)
-                echo "Deployment complete."
+                  --resource-group $(resourceGroupName) \
+                  --template-file infrastructure/main.bicep \
+                  --parameters @infrastructure/parameters.$(environment).json \
+                  --parameters location=$(location)
