@@ -30,5 +30,5 @@ stages:
                 az deployment group create \
                   --resource-group bicep.app \
                   --template-file infrastructure/main.bicep \
-                  --parameters @parameters.dev.json
+                  --parameters @infrastructure/parameters.dev.json
                   echo "Deployment complete."
