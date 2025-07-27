@@ -41,6 +41,6 @@ module keyvault './modules/keyvault.bicep' = {
 }
 
 // az deployment group create \
-//  --resource-group my-rg \
+//  --resource-group bicep.app \
 //  --template-file main.bicep \
 //  --parameters @parameters.dev.json
