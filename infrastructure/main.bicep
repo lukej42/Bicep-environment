@@ -44,3 +44,7 @@ module keyvault './modules/keyvault.bicep' = {
 //  --resource-group bicep.app \
 //  --template-file main.bicep \
 //  --parameters @parameters.dev.json
+
+// If the above fails, use
+// az deployment group create --resource-group bicep-app --template-file main.bicep --parameters @parameters.dev.json --no-wait
+// az deployment group create --resource-group bicep-app --template-file main.bicep --parameters @parameters.prod.json --no-wait
