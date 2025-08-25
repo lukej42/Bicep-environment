@@ -4,8 +4,7 @@ trigger:
       - main
 
 variables:
-  azureSubscription: 'Your-Service-Connection-Name'  # Replace with your service connection name
-  resourceGroupName: 'bicep-app'                  
+  resourceGroupName: 'armbicep'                  
   location: 'uksouth'
   appName: 'myapp'
 
@@ -30,6 +29,13 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                echo "Installing Bicep CLI..."
+                az bicep install
+
+                echo "Validating Bicep..."
+                az bicep build --file ./Infrastructure/main.bicep
+
+                echo "Deploying Bicep to Azure..."
                 echo "Deploying to ${{ parameters.environment }}..."
                 az deployment group create \
                   --resource-group $(resourceGroupName) \
