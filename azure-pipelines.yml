@@ -1,5 +1,7 @@
 trigger: none
 
+pr: none
+
 variables:
   resourceGroupName: 'armbicep'                  
   location: 'uksouth'
