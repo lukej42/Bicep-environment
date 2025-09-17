@@ -1,0 +1,43 @@
+trigger: none
+
+pr: none
+
+variables:
+  resourceGroupName: 'armbicep'                  
+  location: 'uksouth'
+  appName: 'myapp'
+
+parameters:
+- name: environment
+  type: string
+  default: 'dev'
+
+stages:
+  - stage: DeployInfra
+    displayName: 'Deploy Bicep Infrastructure'
+    jobs:
+      - job: DeployBicep
+        displayName: 'Run Bicep Deployment'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: AzureCLI@2
+            name: Deploy
+            inputs:
+              azureSubscription: 'Azure subscription 1(3)(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Installing Bicep CLI..."
+                az bicep install
+
+                echo "Validating Bicep..."
+                az bicep build --file ./Infrastructure/main.bicep
+
+                echo "Deploying Bicep to Azure..."
+                echo "Deploying to ${{ parameters.environment }}..."
+                az deployment group create \
+                  --resource-group $(resourceGroupName) \
+                  --template-file infrastructure/main.bicep \
+                  --parameters infrastructure/${{ parameters.environment }}.bicepparam \
+                  --parameters location=$(location)
