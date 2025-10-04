@@ -32,7 +32,7 @@ stages:
                 az bicep install
 
                 echo "Validating Bicep..."
-                az bicep build --file ./Infrastructure/main.bicep
+                az bicep build --file ./infrastructure/main.bicep
 
                 echo "Deploying Bicep to Azure..."
                 echo "Deploying to ${{ parameters.environment }}..."
