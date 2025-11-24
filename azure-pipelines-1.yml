@@ -24,16 +24,16 @@ stages:
           - task: AzureCLI@2
             name: Deploy
             inputs:
-              azureSubscription: 'Azure subscription 1(3)(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
+              azureSubscription: 'Azure subscription 1(4)(525c7c1f-f5e9-4bf4-8d7a-5b7a06889a12)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 echo "Installing Bicep CLI..."
                 az bicep install
-
+                
                 echo "Validating Bicep..."
                 az bicep build --file ./infrastructure/main.bicep
-
+                
                 echo "Deploying Bicep to Azure..."
                 echo "Deploying to ${{ parameters.environment }}..."
                 az deployment group create \
